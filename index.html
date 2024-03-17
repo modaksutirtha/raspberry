@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>L&Pcontrol</title>
+    <link href="https://fonts.googleapis.com/css?family=Baloo+Bhai|Bree+Serif&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        body {
+            background-color: skyblue;
+            font-family: 'Bree Serif', serif;
+        }
+        h1 {
+            font-size: 2.5rem;
+            text-align: center;
+        }
+        h2 {
+            font-size: 2rem;
+            text-align: center;
+        }
+        #twopart {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 20px 60px;
+
+        }
+        .level {
+            border: 5px solid white;
+            height: 30rem;
+            width: 50%;
+            border-radius: 13px;
+            margin-right: 83px;
+            text-align: center;
+            background-color: #f3dbdf;
+        }
+        .pressure {
+            border: 5px solid white;
+            border-radius: 13px;
+            height: 30rem;
+            width: 50%;
+            text-align: center;
+            background-color: #f3dbdf;
+        }
+        label {
+            font-size: 2rem;
+        }
+        input {
+            height: 36px;
+            width: 178px;
+            border-radius: 10px;
+            font-size: 1.5rem;
+            padding: 7px;
+            font-family: 'Bree Serif', serif;
+        }
+        .inpu {
+            height: 36px;
+            width: 178px;
+            border-radius: 10px;
+            font-size: 1.5rem;
+            margin-left: 229px;
+            background-color: white;
+        }
+        .comedown {
+            margin-top: 60px;
+        }
+        .itis {
+            margin-top: 5px;
+        }
+        img {
+            height: 60px;
+            width: 60px;
+        }
+        #but {
+            padding: 5px 30px;
+            border-radius: 20px;
+            background-color: #eef689;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            margin: auto;
+        }
+        .buti {
+            text-align: center;
+        }
+        .fa{
+            margin-top: 23px;
+        }
+        .fa:hover {
+            cursor: pointer;
+        }
+    </style>
+</head>
+<!-- ........................................................................................................ -->
+<body>
+    <div id="top">
+        <h1>LEVEL AND PRESSURE CONTROL SYSTEM</h1>
+        <h2>...Tripod...</h2>
+    </div>
+
+    <div id="twopart">
+        <div class="level">
+            <h2>level Control</h2>
+            <img src="./settings.png" alt="">
+            <div id="lev" class="comedown">
+                <label>Enter the Level:-</label>
+                <br>
+                <div value="0" id="outputu" class="inp inpu">
+                    <input type="text">
+                </div>
+                <i class="fa fa-microphone itis" onclick="runSpeechRecogni()" style="font-size:36px"></i>
+                <p id="actionu" class="hide "></p>
+            </div>
+
+        </div>
+
+        <div class="pressure">
+            <h2>Pressure Control</h2>
+            <img src="./pressure-gauge.png" alt="">
+            <div id="pres" class="comedown">
+                <label>Enter the Pressure:-</label>
+                <br>
+                <div value="0" id="output" class="inp inpu"><input type="text"></div>
+                <i class="fa fa-microphone" onclick="runSpeechRecog()" style="font-size:36px"></i>
+                <p id="action" class="hide"></p>
+            </div>
+        </div>
+
+    </div>
+    <div class="buti">
+        <button id="but" onClick="location.reload()">RESET</button>
+
+    </div>
+<!-- ..................................................................................................... -->
+    <script>
+        runSpeechRecogni = () => {
+            document.getElementById("outputu").innerHTML = ".....";
+            var output = document.getElementById('outputu');
+            var action = document.getElementById('actionu');
+            let recognization = new webkitSpeechRecognition();
+            recognization.onstart = () => {
+                action.innerHTML = "Listening...";
+
+            }
+            recognization.onresult = (e) => {
+                var transcript = e.results[0][0].transcript;
+                output.innerHTML = transcript;
+                console.log(transcript);
+                output.classList.remove("hide")
+                action.innerHTML = "";
+            }
+            recognization.start();
+        }
+
+        runSpeechRecog = () => {
+            document.getElementById("output").innerHTML = ".....";
+            var output = document.getElementById('output');
+            var action = document.getElementById('action');
+            let recognization = new webkitSpeechRecognition();
+            recognization.onstart = () => {
+                action.innerHTML = "Listening...";
+
+            }
+            recognization.onresult = (e) => {
+                var transcript = e.results[0][0].transcript;
+                output.innerHTML = transcript;
+                console.log(transcript);
+                output.classList.remove("hide")
+                action.innerHTML = "";
+            }
+            recognization.start();
+        }
+    </script>
+
+</body>
+
+</html>
